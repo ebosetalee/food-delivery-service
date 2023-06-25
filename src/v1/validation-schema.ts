@@ -1,17 +1,27 @@
 import Joi from "joi";
 
+const optionalString = Joi.string().trim();
+const requiredString = optionalString.required();
+const requiredEmail = requiredString.email();
+// const optionalNumber = Joi.number().min(1).integer();
+// const requiredNumber = optionalNumber.required();
+// const requiredDate = Joi.date().required();
+const requiredRegexPhone = optionalString.required().regex(/(234|0)[7-9][0-1][0-9]{8}/);
+
 const CREATE = Joi.object().keys({
-    username: Joi.string().required(),
-    firstName: Joi.string().required(),
-    lastName: Joi.string().required(),
-    email: Joi.string().email().required(),
-    phone: Joi.string()
-        .required()
-        .regex(/(234|0)[7-9][0-1][0-9]{8}/),
-    password: Joi.string().required(),
-    role: Joi.string().allow("super_admin", "admin", "regular").optional()
+    name: requiredString,
+    address: requiredString,
+    email: requiredEmail,
+    phone: requiredRegexPhone,
+    password: requiredString,
+});
+
+const LOGIN = Joi.object({
+    email: requiredEmail,
+    password: requiredString,
 });
 
 export default {
-    CREATE
+    CREATE,
+    LOGIN,
 };

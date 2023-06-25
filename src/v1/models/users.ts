@@ -1,48 +1,41 @@
 import mongoose from "mongoose";
+import { createID } from "@root/utils";
 
-// Basic details of an admin, you can add more
 const userSchema = new mongoose.Schema(
     {
-        username: {
+        id: {
             type: String,
-            required: [true, "Please input you preferred username"],
-            unique: true
+            default: createID(),
         },
-        firstName: {
+        name: {
             type: String,
-            required: [true, "Please input you first name"]
-        },
-        lastName: {
-            type: String,
-            required: [true, "Please input you last name"]
+            required: [true, "Please input your name"],
         },
         email: {
             type: String,
             required: [true, "Please input your email"],
             unique: true,
-            lowercase: true
         },
         phone: {
             type: String,
-            required:  [true, "Please input you phone number"]
+            required: [true, "Please input you phone number"],
+        },
+        address: {
+            type: String,
+            required: [true, "Please input your address"],
         },
         password: {
             type: String,
-            required:  [true, "Please input you preferred password"],
+            required: [true, "Please input you preferred password"],
             minlength: 8,
-            select: false
-        },
-        role: {
-            type: String,
-            enum: ["super_admin", "admin", "regular"],
-            default: "regular"
+            select: false,
         },
         password_reset_token: { type: String, select: false },
-        password_reset_expires: { type: Date, select: false }
+        password_reset_expires: { type: Date, select: false },
     },
     {
-        timestamps: true
-    }
+        timestamps: true,
+    },
 );
 
 const User = mongoose.model("User", userSchema);
