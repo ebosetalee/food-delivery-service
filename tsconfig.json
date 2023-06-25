@@ -18,8 +18,8 @@
         "@root/*": ["*"],
         "@v1/*": ["v1/*"],
         "@routes/*": ["v1/routes/*"],
-        "@controller/*": ["v1/controllers/*"]
+        "@controllers/*": ["v1/controllers/*"]
     }
     },
-    "exclude": ["src/**/*.test.ts", "src/**/mocks/*.ts"]
+    "exclude": ["src/**/*.test.ts", "src/**/mocks/*.ts", "jest.config.ts",]
 }

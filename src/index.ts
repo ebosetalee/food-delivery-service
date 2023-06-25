@@ -1,11 +1,11 @@
 import app from "./app";
 import logger from "./utils/logger";
-import { connectToDB } from "./config/database";
+import connectToDB from "./config/database";
+import env from "./config/env";
+const { port } = env;
 
-const port = process.env.PORT || 3041;
-
-process.on("unhandledRejection", err => {
-    logger.error("UNHANDLED REJECTION! 💥 Shutting down...");
+process.on("unhandledRejection", (err: Error) => {
+    logger.message("UNHANDLED REJECTION! 💥 Shutting down...");
     logger.error(err);
     process.exit(1);
 });
@@ -13,9 +13,9 @@ process.on("unhandledRejection", err => {
 connectToDB()
     .then(() => {
         app.listen(port, () => {
-            logger.debug(`server is runnng on port: ${port}`);
+            logger.message(`server is runnng on port: ${port}`);
         });
     })
     .catch(() => {
-        logger.error("Database connection failed");
+        logger.error({ name: "database", message: "Database connection failed" });
     });
