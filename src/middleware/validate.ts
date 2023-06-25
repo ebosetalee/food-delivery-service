@@ -11,7 +11,7 @@ const validate =
             const errorDetails = error.details.map(detail => detail.message).join(", ");
 
             throw new ValidationError(`Invalid input: ${errorDetails}`, PRECONDITION_FAILED, {
-                failed_fields: error.details.map(err => err.path.join("."))
+                failed_fields: error.details.map(err => err.path.join(".")),
             });
         }
 
