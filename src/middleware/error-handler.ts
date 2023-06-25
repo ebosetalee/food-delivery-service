@@ -11,7 +11,7 @@ function errorHandler(err, req: Request, res: Response, next: NextFunction) {
         message: err.message || "Something went wrong try again later",
         metadata: err.metadata,
     };
-    
+
     if (err.name == "ValidationError") {
         if (typeof err.message == "string") {
             error.message = err.message.replace(/"/g, "");
