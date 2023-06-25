@@ -9,3 +9,5 @@ export async function verifyHash(param: string | Buffer, hashedPram: string) {
 }
 
 export const createOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
+
+export const createID = (prefix = "USR-") => `${prefix}` + Math.floor(100000 + Math.random() * 900000).toString();

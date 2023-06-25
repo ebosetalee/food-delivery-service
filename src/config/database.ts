@@ -1,17 +1,13 @@
 import mongoose from "mongoose";
+import env from "./env";
 
-export async function connectToDB() {
-    await mongoose
-        .connect(process.env.MONGO_URI)
-        .then(() => {
-            console.log("Connected to Database....");
-        })
-        .catch(err => {
-            console.log("Error: ", err);
-            throw err;
-        });
+mongoose.set("strictQuery", true);
+async function connectToDB(URI = env.mongo_uri) {
+    return await mongoose.connect(URI);
 }
 
-export function close() {
-    return mongoose.disconnect();
+export async function close() {
+    return await mongoose.disconnect();
 }
+
+export default connectToDB;
